@@ -16,6 +16,7 @@ const SellingList: React.FC = () => {
         {data &&
           data?.map((item) => (
             <div
+            
               data-aos="zoom-in-up"
               key={item.id}
               className="relative h-[400px] w-[300px] p-4 bg-white shadow-md rounded-lg overflow-hidden group transition duration-300 ease-in-out transform hover:scale-105"
