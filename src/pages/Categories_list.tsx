@@ -1,24 +1,40 @@
 import { useState } from "react";
 import { useFilterProducts } from "../hooks/Product-Hoosk";
 import MyButton from "../components/common/Botton";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Filters } from "../types/products";
 
+
 const Categories_list = () => {
-     const  {id} = useParams()
+    // const location = useLocation();
+
+
+
   const [brand, setBrand] = useState("");
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined); 
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined); 
   const [isAvailable, setIsAvailable] = useState<boolean | undefined>(undefined); 
-//   const [category, setCategory] = useState(id); 
+  const [category, setCategory] = useState(""); 
 
+// const updateQueryParams = (filterValue: string) => {
 
+//     const searchParams = new URLSearchParams(location.search);
+//     if (filterValue) {
+//       searchParams.set('filter', filterValue); 
+//       const filter = searchParams.get('filter');
+//        console.log(filter);
+//        setBrand(String(filter))
+//     }
+   
+//     navigate(`${location.pathname}?${searchParams.toString()}`);
+//   };
+//   updateQueryParams("men")
   const { data: products, loading, error } = useFilterProducts({
     brand,
     min_price: minPrice,  
     max_price: maxPrice,  
     is_available: isAvailable,  
-    category:id,
+    category:category,
   } as Filters);
 
 
@@ -57,13 +73,13 @@ const Categories_list = () => {
           />
           <span className="ml-2">Available</span>
         </label>
-        {/* <input
+        <input
           type="text"
           placeholder="Category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           className="border p-2 rounded mx-2"
-        /> */}
+        />
         <MyButton
           label="Apply Filters"
             onClick={()=>console.log("nu")}
