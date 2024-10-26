@@ -22,21 +22,21 @@ export const useGetProduct=(id:number)=>{
 }
 
 export const useSearchApi=(searchTerm:string)=>{
-    const [data, setData] = useState<Product[]>([]); // Replace `any` with your product type
+    const [data, setData] = useState<Product[]>([]); 
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
 
     useEffect(() => {
         const fetchData = async () => {
-          if (!searchTerm) return; // Do not fetch if searchTerm is empty
+          if (!searchTerm) return; 
     
           setLoading(true);
-          setError(null); // Reset the error state before fetching
+          setError(null);
             
           try {
             const result = await searchProducts(searchTerm);
-            setData(result); // Set the fetched data
+            setData(result); 
           } catch (err) {
             const errorResponse = err as ApiError;
             setError(errorResponse.message || 'An error occurred while fetching data.');
