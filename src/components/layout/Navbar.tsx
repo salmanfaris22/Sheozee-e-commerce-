@@ -1,8 +1,10 @@
 import { LiaAdobe } from "react-icons/lia";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { IoSearchSharp } from "react-icons/io5";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import SearchComponent from "./SerchBar";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,10 +32,7 @@ const Navbar = () => {
         <div className="cursor-pointer">Brand</div>
         <div className="cursor-pointer">More Categories</div>
       </div>
-      <label className="flex items-center border rounded-lg overflow-hidden">
-          <input type="text" className="p-2 border-none w-[300px] focus:outline-none" placeholder="Search..." />
-          <IoSearchSharp className="p-2 text-gray-500" />
-        </label>
+     <SearchComponent/>
       <div className="flex items-center gap-3 mr-10">
        
         <FaShoppingCart className="text-2xl cursor-pointer" />

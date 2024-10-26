@@ -19,3 +19,8 @@ export interface Product {
   export interface ProductResponse {
     message: Product[];
 }
+
+export interface ApiError {
+  message: string;
+  status?: number; // Optional if your API provides status codes
+}
