@@ -13,7 +13,7 @@ const AllCategories = () => {
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-[100px] gap-5'>
             {data && data.map((item) => (
                 <div key={item.id} className="shadow-lg p-4 h-[390px] rounded-md bg-white">
-                    <Link to={`/byProducts/${item.id}`}>
+                    <Link to={`/product/${item.id}`}>
                         <img
                             src={item.images[0]}
                             alt={item.name}

@@ -33,7 +33,7 @@ const SellingList: React.FC = () => {
                   label={"Buy Now"} 
                   type={"button"} 
                   onClick={() => console.log("clicked")} 
-                  className={"text-white text-lg font-semibold bg-blue-600 py-2 px-4 rounded-lg"}
+                  className={"text-white text-lg hover:bg-white hover:text-blue-500 font-semibold bg-blue-600 py-2 px-4 rounded-lg"}
                 />
               </button>
 
@@ -49,9 +49,13 @@ const SellingList: React.FC = () => {
             </div>
           ))}
           <div className="flex justify-center items-center relative h-[400px] w-[300px] p-4 bg-white shadow-md rounded-lg overflow-hidden group transition duration-300 ease-in-out transform hover:scale-105">
-           <div className="text-blue-500 font-bold text-4xl p-5">
-           More product
-           </div>
+           
+           <MyButton 
+                  label={" More product"} 
+                  type={"button"} 
+                  onClick={() => console.log("clicked")} 
+                  className={"text-white text-lg border border-blue-500 hover:bg-white hover:text-blue-500 font-semibold bg-blue-600 py-2 px-4 rounded-lg"}
+                />
           </div>
       </div>
     </div>

@@ -19,7 +19,9 @@ const Navbar = () => {
       </div>
 
       <div className="hidden md:flex items-center gap-6">
+      <Link to={"/"}>
         <div className="cursor-pointer">Home</div>
+        </Link>
         <Link to={"/allCategories"}>
         <div className="cursor-pointer">All Categories</div>
         </Link>

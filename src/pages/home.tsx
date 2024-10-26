@@ -79,6 +79,7 @@ const Home = () => {
         </div>
       </div>
 <ProductList/>
+
     </div>
   );
 };
