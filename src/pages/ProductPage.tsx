@@ -12,13 +12,12 @@ const ProductPage = () => {
   // State for quantity management
   const [quantity, setQuantity] = useState(0);
 
-  // Functions to manage quantity
+// Functions to manage quantity
   const increaseQuantity = () => {
-    if (quantity < data?.stock) {
+    if (data?.stock !== undefined && quantity < data.stock) {
       setQuantity((prev) => prev + 1);
     }
   };
-
   const decreaseQuantity = () => {
     if (quantity > 0) {
       setQuantity((prev) => prev - 1);
