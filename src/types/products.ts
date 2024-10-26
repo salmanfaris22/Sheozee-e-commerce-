@@ -24,3 +24,14 @@ export interface ApiError {
   message: string;
   status?: number; // Optional if your API provides status codes
 }
+
+
+export interface Filters{
+  brand: string;
+  min_price: number;
+  max_price: number;
+  is_available: boolean;
+  category: string;
+}
+
+

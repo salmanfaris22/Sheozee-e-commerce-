@@ -27,7 +27,9 @@ const Navbar = () => {
         <Link to={"/allCategories"}>
         <div className="cursor-pointer">All Categories</div>
         </Link>
-        <div className="cursor-pointer">Men</div>
+        <Link to={"/categories_list/men"}> <div className="cursor-pointer">Men</div>
+        </Link>
+       
         <div className="cursor-pointer">Women</div>
         <div className="cursor-pointer">Brand</div>
         <div className="cursor-pointer">More Categories</div>

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { ApiError, Product } from "../types/products";
-import { fetchProduct, fetchProducts, searchProducts } from "../api/productAPI";
+import { ApiError, Filters, Product } from "../types/products";
+import { fetchProduct, fetchProducts, filterProducts, searchProducts } from "../api/productAPI";
 import { useEffect, useState } from "react";
 
 
@@ -49,4 +49,37 @@ export const useSearchApi=(searchTerm:string)=>{
       }, [searchTerm]);
     
       return { data, loading, error };
+}
+
+
+
+export const useFilterProducts = (filters:Filters)=>{
+        const [data,setData]=useState<Product[]>([])
+        const [loading, setLoading] = useState<boolean>(false);
+        const [error, setError] = useState<string | null>(null);
+
+
+        useEffect(()=>{
+            const fetchData = async()=>{
+                setLoading(true);
+                setError(null);
+
+                try{
+                    const result = await filterProducts(filters)
+                    setData(result)
+                    setLoading(false)
+                   
+                }catch(err){
+                    const erros   =err as ApiError
+                    setError(  erros.message ||  'An error occurred while fetching filtered products.');
+                }finally{
+                    setLoading(false)
+                }
+            }
+
+            fetchData()
+        },[filters.brand,filters.category,filters.max_price,filters.min_price])
+
+
+        return {data,loading,error}
 }
