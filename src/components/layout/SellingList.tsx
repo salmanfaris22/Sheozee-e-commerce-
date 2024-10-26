@@ -10,13 +10,14 @@ const SellingList: React.FC = () => {
   return (
     <div className="bg-gray-100">
       <div className="text-blue-500 font-bold text-4xl p-5  flex text-center  mt-6   justify-center items-center">
-        Best Seller
+        Best Sellerlkmlk
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 bg-gray-100 gap-4 p-10">
         {data &&
+        
           data?.map((item) => (
             <div
-            
+
               data-aos="zoom-in-up"
               key={item.id}
               className="relative h-[400px] w-[300px] p-4 bg-white shadow-md rounded-lg overflow-hidden group transition duration-300 ease-in-out transform hover:scale-105"
