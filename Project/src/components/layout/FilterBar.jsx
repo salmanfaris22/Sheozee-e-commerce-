@@ -1,9 +1,6 @@
-import {  useState } from "react";
-
-import { useFilterProducts } from "../../hooks/Product-Hoosk"; // Adjust the import based on your structure
+import { useState } from "react";
+import { useFilterProducts } from "../../hooks/Product-Hoosk"; 
 import MyButton from "../common/Botton";
-import { FaFilter, FaTimes } from 'react-icons/fa'; // Importing icons
-
 
 const FilterComponent = () => {
   const [brand, setBrand] = useState("");
@@ -11,10 +8,8 @@ const FilterComponent = () => {
   const [maxPrice, setMaxPrice] = useState(undefined);
   const [isAvailable, setIsAvailable] = useState(undefined);
   const [category, setCategory] = useState("");
-  const [isOpen, setIsOpen] = useState(false); 
 
-
-    useFilterProducts({
+  useFilterProducts({
     brand,
     min_price: minPrice,
     max_price: maxPrice,
@@ -22,90 +17,72 @@ const FilterComponent = () => {
     category: category,
   });
 
- 
-
   const brands = ["nike", "puma", "adidas"];
   const categories = ["men", "women"];
 
-  const toggleFilter = () => {
-    setIsOpen(!isOpen);
-  };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    setIsOpen(false); // Close the filter panel after applying filters
-  };
 
   return (
-    <div className="fixed bg-white h-screen top-0 z-[9999999] p-2 rounded-lg">
-      <button
-        onClick={toggleFilter}
-        className="absolute top-4 right-4 mt-[60px] bg-blue-500 text-white p-2 rounded-full flex items-center justify-center"
-      >
-        {isOpen ? <FaTimes /> : <FaFilter />} 
-      </button>
+    <div className="bg-black border border-gray-900 fixed mt-[80px] p-2 z-[99999] flex justify-center items-center w-[100%] top-0 right-0">
+      <form className="justify-between items-center bg-black w-[100%] flex gap-4">
 
-      {isOpen && (
-        <form className="mb-4 flex flex-col h-screen w-[400px] gap-4 p-4 mt-[100px]" onSubmit={handleSubmit}>
-          <div className="flex flex-col mb-4">
-            <h3 className="font-semibold">Brands</h3>
-            <div className="flex space-x-2">
-              {brands.map((b) => (
-                <MyButton
-                  key={b}
-                  label={b}
-                  onClick={() => setBrand(prev => prev === b ? undefined : b)} // Toggle brand selection
-                  className={`border p-2 rounded ${brand === b ? "bg-blue-500 text-white" : "bg-white text-black"}`}
-                />
-              ))}
-            </div>
+        <div className="flex justify-center items-center gap-2 bg-black rounded-lg">
+          <h3 className="font-semibold text-white">Brands</h3>
+          <div className="flex space-x-2">
+            {brands.map((b) => (
+              <MyButton
+                key={b}
+                label={b}
+                onClick={() => setBrand((prev) => (prev === b ? undefined : b))} // Toggle brand selection
+                className={`border p-2 border-gray-900  rounded ${brand === b ? "bg-blue-500 text-white" : "bg-black text-white"}`}
+              />
+            ))}
           </div>
+        </div>
 
-          <div className="flex flex-col mb-4">
-            <h3 className="font-semibold">Categories</h3>
-            <div className="flex space-x-2">
-              {categories.map((c) => (
-                <MyButton
-                  key={c}
-                  label={c}
-                  onClick={() => setCategory(prev => prev === c ? undefined : c)} // Toggle category selection
-                  className={`border p-2 rounded ${category === c ? "bg-blue-500 text-white" : "bg-white text-black"}`}
-                />
-              ))}
-            </div>
+
+        <div className="flex justify-center items-center gap-2 bg-black rounded-lg">
+          <h3 className="font-semibold text-white">Categories</h3>
+          <div className="flex space-x-2">
+            {categories.map((c) => (
+              <MyButton
+                key={c}
+                label={c}
+                onClick={() => setCategory((prev) => (prev === c ? undefined : c))} // Toggle category selection
+                className={`border border-gray-900 rounded ${category === c ? "bg-blue-500 text-white" : "bg-black text-white"}`}
+              />
+            ))}
           </div>
-
+        </div>
+      
+        <div className="flex justify-center items-center gap-2 bg-black rounded-lg">
           <input
             type="number"
             placeholder="Min Price"
             value={minPrice ?? ''}
             onChange={(e) => setMinPrice(e.target.value ? Number(e.target.value) : undefined)}
-            className="border p-2 rounded mx-2"
+              className="border bg-black border-gray-900 rounded mx-2 p-1"
           />
           <input
             type="number"
             placeholder="Max Price"
             value={maxPrice ?? ''}
             onChange={(e) => setMaxPrice(e.target.value ? Number(e.target.value) : undefined)}
-            className="border p-2 rounded mx-2"
+            className="border bg-black border-gray-900 rounded mx-2 p-1"
           />
-          <label className="flex items-center mb-4">
-            <input
-              type="checkbox"
-              checked={isAvailable === true}
-              onChange={(e) => setIsAvailable(e.target.checked ? true : undefined)}
-            />
-            <span className="ml-2">Available</span>
-          </label>
-          
-          <MyButton
-            label="Apply Filters"
-            type="submit"
-            className="bg-blue-500 text-white p-2 rounded"
+        </div>
+        
+
+        <label className="flex items-center justify-center gap-2 bg-black p-2 rounded-lg">
+          <input
+            type="checkbox"
+            checked={isAvailable === true}
+            onChange={(e) => setIsAvailable(e.target.checked ? true : undefined)}
           />
-        </form>
-      )}
+          <span className="ml-2 text-white">Available</span>
+        </label>
+       
+      </form>
     </div>
   );
 };
