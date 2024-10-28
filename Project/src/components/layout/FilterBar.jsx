@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import {  useState } from "react";
+
 import { useFilterProducts } from "../../hooks/Product-Hoosk"; // Adjust the import based on your structure
 import MyButton from "../common/Botton";
 import { FaFilter, FaTimes } from 'react-icons/fa'; // Importing icons
-import { GetProduct } from "../../features/products/ProductSlice";
+
 
 const FilterComponent = () => {
   const [brand, setBrand] = useState("");
@@ -12,10 +12,9 @@ const FilterComponent = () => {
   const [isAvailable, setIsAvailable] = useState(undefined);
   const [category, setCategory] = useState("");
   const [isOpen, setIsOpen] = useState(false); 
-  const dispatch = useDispatch();
-  
 
-  const { data: products } = useFilterProducts({
+
+    useFilterProducts({
     brand,
     min_price: minPrice,
     max_price: maxPrice,
@@ -23,10 +22,7 @@ const FilterComponent = () => {
     category: category,
   });
 
-  useEffect(()=>{
-    dispatch(GetProduct(products))
-  },[brand,minPrice,maxPrice,isAvailable,category])
-
+ 
 
   const brands = ["nike", "puma", "adidas"];
   const categories = ["men", "women"];
@@ -35,9 +31,14 @@ const FilterComponent = () => {
     setIsOpen(!isOpen);
   };
 
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    setIsOpen(false); // Close the filter panel after applying filters
+  };
+
   return (
     <div className="fixed bg-white h-screen top-0 z-[9999999] p-2 rounded-lg">
-
       <button
         onClick={toggleFilter}
         className="absolute top-4 right-4 mt-[60px] bg-blue-500 text-white p-2 rounded-full flex items-center justify-center"
@@ -46,7 +47,7 @@ const FilterComponent = () => {
       </button>
 
       {isOpen && (
-        <form className="mb-4 flex flex-col h-screen w-[400px] gap-4 p-4 mt-[100px]">
+        <form className="mb-4 flex flex-col h-screen w-[400px] gap-4 p-4 mt-[100px]" onSubmit={handleSubmit}>
           <div className="flex flex-col mb-4">
             <h3 className="font-semibold">Brands</h3>
             <div className="flex space-x-2">
@@ -54,7 +55,7 @@ const FilterComponent = () => {
                 <MyButton
                   key={b}
                   label={b}
-                  onClick={() => setBrand(b)}
+                  onClick={() => setBrand(prev => prev === b ? undefined : b)} // Toggle brand selection
                   className={`border p-2 rounded ${brand === b ? "bg-blue-500 text-white" : "bg-white text-black"}`}
                 />
               ))}
@@ -68,7 +69,7 @@ const FilterComponent = () => {
                 <MyButton
                   key={c}
                   label={c}
-                  onClick={() => setCategory(c)}
+                  onClick={() => setCategory(prev => prev === c ? undefined : c)} // Toggle category selection
                   className={`border p-2 rounded ${category === c ? "bg-blue-500 text-white" : "bg-white text-black"}`}
                 />
               ))}

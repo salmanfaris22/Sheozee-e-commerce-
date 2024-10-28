@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { fetchProduct, fetchProducts, filterProducts, searchProducts } from "../api/productAPI";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { GetProduct } from "../features/products/ProductSlice";
 
 // Hook to get all products
 export const useGetAllProduct = () => {
@@ -54,18 +56,23 @@ export const useFilterProducts = (filters) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
+    const dispatch =useDispatch()
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
+            dispatch(GetProduct({loading}));
+           
             setError(null);
-            try {
+            try { 
                 const result = await filterProducts(filters);
                 setData(result);
+
+                dispatch(GetProduct({result,loading,error}));
             } catch (err) {
                 setError(err.message || 'An error occurred while fetching filtered products.');
             } finally {
                 setLoading(false);
+               
             }
         };
 

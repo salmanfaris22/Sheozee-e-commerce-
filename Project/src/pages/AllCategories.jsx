@@ -2,24 +2,40 @@
 import { useSelector } from 'react-redux';
 import MyButton from '../components/common/Botton';
 import FilterBar from '../components/layout/FilterBar';
-import {   useGetAllProduct } from '../hooks/Product-Hoosk';
+
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../components/common/Loading';
+import { useEffect, useState } from 'react';
+
+
+
 
 const AllCategories = () => {
-    const { data, isLoading, error } = useGetAllProduct();
-     const {data:product} = useSelector(state => state.product);
-     console.log(product);
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error fetching products.</div>; 
+
     
+     const {data,loading} = useSelector(state => state.product);
+     const [loadings, setLoading] = useState(!loading);
+     useEffect(() => {
+        setLoading(false)
+         if(loading){
+            const timer = setTimeout(() => {
+                setLoading(false);
+            }, 1000);
+            return () => clearTimeout(timer);
+         }
+     }, [loading]);
+
+     if (loadings) {
+         return <div className='h-screen'><LoadingSpinner />;</div>
+     }
     return (
-      <div className='mt-[100px]'>
+      <div className='mt-[100px] min-h-screen'>
         <div className='flex justify-end'>
         <FilterBar/>
         </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-5'>
           
-            {data && data.map((item) => (
+            {data && data?.map((item) => (
                 <div key={item.id} className="shadow-lg p-4 h-[390px] rounded-md bg-white">
                     <Link to={`/product/${item.id}`}>
                         <img
