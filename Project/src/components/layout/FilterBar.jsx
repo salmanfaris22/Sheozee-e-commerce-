@@ -23,7 +23,7 @@ const FilterComponent = () => {
 
 
   return (
-    <div className="bg-black border border-gray-900 fixed mt-[80px] p-2 z-[99999] flex justify-center items-center w-[100%] top-0 right-0">
+    <div className="bg-black border border-gray-900 fixed mt-[80px] p-2 z-[99] flex justify-center items-center w-[100%] top-0 right-0">
       <form className="justify-between items-center bg-black w-[100%] flex gap-4">
 
         <div className="flex justify-center items-center gap-2 bg-black rounded-lg">

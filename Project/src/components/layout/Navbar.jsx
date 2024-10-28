@@ -1,14 +1,33 @@
 import { LiaAdobe } from "react-icons/lia";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchComponent from "../common/SerchBar";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleUserMenu = () => {
+    setIsUserMenuOpen(!isUserMenuOpen);
+  };
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('userId');
+    setIsLoggedIn(false);
   };
 
   return (
@@ -36,7 +55,38 @@ const Navbar = () => {
 
       <div className="flex items-center gap-3 mr-10">
         <FaShoppingCart className="text-2xl cursor-pointer text-white hover:text-gray-300 transition-colors duration-200" />
-        <FaUser className="hidden md:flex text-2xl cursor-pointer text-white hover:text-gray-300 transition-colors duration-200" />
+        <div className="relative">
+          <FaUser 
+            className="text-2xl cursor-pointer text-white hover:text-gray-300 transition-colors duration-200"
+            onClick={toggleUserMenu} 
+          />
+          {isUserMenuOpen && (
+            <div className="absolute z-[99999999] right-0 mt-2 w-48 bg-black text-white rounded-md shadow-lg">
+              {!isLoggedIn ? (
+                <>
+                  <Link to="/login ">
+                    <div  onClick={toggleUserMenu}  className="px-4 py-2 z-[99999999] r hover:bg-gray-700 cursor-pointer">Login</div>
+                  </Link>
+                  <Link to="/register">
+                    <div  onClick={toggleUserMenu}  className="px-4 py-2 z-[99999] r hover:bg-gray-700 cursor-pointer">Register</div>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/profile">
+                    <div className="px-4 py-2 hover:bg-gray-700 cursor-pointer">Profile</div>
+                  </Link>
+                  <div 
+                    className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Mobile Menu Button */}
