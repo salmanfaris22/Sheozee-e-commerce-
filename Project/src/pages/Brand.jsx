@@ -17,7 +17,7 @@ const Brands = () => {
 
   return (
     <div className="overflow-auto h-screen">
-      <div className="flex overflow-x-auto bg-black">
+      <div className="flex overflow-x-auto bg-white">
         {brands.map((brand, i) => (
           <div key={i} className="relative h-[100vh] w-[300px] md:w-[400px] flex-shrink-0 bg-black  opacity-black">
 

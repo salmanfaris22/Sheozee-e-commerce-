@@ -10,13 +10,13 @@ const ProductPage = () => {
   const { data } = useGetProduct(productID);
   const { data: products } = useGetAllProduct();
 
-  // State for quantity management
+
   const [quantity, setQuantity] = useState(0);
 
-  // State for wishlist management
+
   const [isWishlisted, setIsWishlisted] = useState(false);
 
-  // Functions to manage quantity
+
   const increaseQuantity = () => {
     if (data?.stock !== undefined && quantity < data.stock) {
       setQuantity((prev) => prev + 1);
@@ -29,7 +29,7 @@ const ProductPage = () => {
     }
   };
 
-  // Function to add to cart
+
   const addToCart = () => {
     console.log(`Added ${quantity} of ${data?.name} to cart`);
   };
@@ -54,26 +54,33 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="min-h-screen mt-[80px] bg-black text-gray-200 w-full">
-      <div className="w-full">
-        <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 bg-black overflow-hidden p-4 gap-6 md:gap-10">
+    <div className="min-h-screen mt-[80px]  bg-white text-black w-full">
+      <div className="w-[80%] m-auto">
+        <div className="rounded-lg grid grid-cols-1 md:grid-cols-2  shadow-md bg-white overflow-hidden p-4 gap-6 md:gap-10">
 
           <div className="grid grid-cols-3 gap-4 p-2">
             <img
-              className="w-full col-span-3 bg-gray-900 h-[400px] object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
+              className="w-full col-span-3 bg-gray-200 h-[400px] object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
               src={data?.images[0]}
               alt={data?.name}
             />
-            <div className="grid grid-cols-3 gap-2">
-              {data?.images.slice(1, 4).map((image, index) => (
-                <img
-                  key={index}
-                  className="w-full object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
-                  src={image}
-                  alt={`${data?.name} - Thumbnail ${index + 1}`}
-                />
-              ))}
-            </div>
+            <img
+              className="w-full h-[100px] col-span-1 bg-gray-200  object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
+              src={data?.images[0]}
+              alt={data?.name}
+            />
+           
+           <img
+              className="w-full h-[100px] col-span-1 bg-gray-200  object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
+              src={data?.images[0]}
+              alt={data?.name}
+            />
+               <img
+              className="w-full h-[100px] col-span-1 bg-gray-200  object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
+              src={data?.images[0]}
+              alt={data?.name}
+            />
+
           </div>
 
           <div className="flex flex-col gap-2 justify-between p-6">
@@ -83,18 +90,18 @@ const ProductPage = () => {
                 onClick={toggleWishlist}
               />
             </div>
-            <div className="flex justify-between text-gray-500 font-bold">
+            <div className="flex justify-between text-gray-600 font-bold">
               <span>{data?.category}</span>
               <span>{data?.company_name}</span>
             </div>
             <div>
-              <h1 className="text-blue-400 font-bold text-3xl">{data?.name}</h1>
-              <p className="text-gray-300 font-bold text-lg">{data?.description}</p>
+              <h1 className="text-blue-500 font-bold text-3xl">{data?.name}</h1>
+              <p className="text-gray-700 font-bold text-lg">{data?.description}</p>
             </div>
-            <div className="text-gray-400 font-bold">Brand: {data?.brand}</div>
+            <div className="text-gray-600 font-bold">Brand: {data?.brand}</div>
             <div className="flex gap-2 flex-wrap mt-2">
               {data?.size?.map((size, i) => (
-                <div key={i} className="p-2 border border-blue-500 rounded-lg font-bold text-center">
+                <div key={i} className="p-2 border border-blue-500 rounded-lg font-bold text-center text-black">
                   {size}
                 </div>
               ))}
@@ -143,7 +150,7 @@ const ProductPage = () => {
       {/* Related Products Scrollable Section */}
       <div className="flex overflow-x-auto p-4 space-x-4 lg:w-[90%] lg:m-auto">
         {products?.map((e) => (
-          <div key={e.id} className="flex-shrink-0 h-[300px] w-[250px] bg-black border border-gray-900 rounded-lg shadow-lg">
+          <div key={e.id} className="flex-shrink-0 h-[300px] w-[250px] bg-white border border-gray-300 rounded-lg shadow-lg">
             <Link to={`/product/${e.id}`} >
               <img
                 src={e.images[0]}
@@ -151,10 +158,10 @@ const ProductPage = () => {
                 alt={e.name}
               />
               <div className="p-2">
-                <h2 className="font-semibold text-gray-300">{e.name}</h2>
+                <h2 className="font-semibold text-gray-800">{e.name}</h2>
                 <div className="flex justify-between">
-                  <p className="text-gray-400">${e.price.toFixed(2)}</p>
-                  <p className="text-gray-400">{e.brand}</p>
+                  <p className="text-gray-600">${e.price.toFixed(2)}</p>
+                  <p className="text-gray-600">{e.brand}</p>
                 </div>
               </div>
             </Link>

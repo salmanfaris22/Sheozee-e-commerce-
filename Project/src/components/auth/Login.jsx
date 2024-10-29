@@ -27,8 +27,8 @@ const LoginPage = () => {
     >
       <div className="relative flex justify-center items-center h-full w-full backdrop-blur-sm p-4">
         <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 flex flex-col max-w-[700px] w-full mx-auto p-6 bg-black rounded-lg shadow-lg">
-          <h1 className="text-2xl font-bold mb-4 text-center text-white">Login</h1>
+        <div className="relative z-10 flex flex-col max-w-[700px] w-full mx-auto p-6 bg-white rounded-lg shadow-lg"> {/* Changed background to white */}
+          <h1 className="text-2xl font-bold mb-4 text-center text-black">Login</h1> {/* Changed text color to black */}
           <div className='grid grid-cols-2 gap-4'>
             <div className='rounded-lg p-3'>
               <img src={LoginImg} className='rounded-lg' alt="" />
@@ -39,7 +39,7 @@ const LoginPage = () => {
                   {...register('email')}
                   type="email"
                   placeholder="Email"
-                  className={`border bg-black placeholder:text-white rounded-md p-2 ${errors.email ? 'border-red-500' : 'border-gray-900'}`}
+                  className={`border bg-white placeholder:text-black rounded-md p-2 ${errors.email ? 'border-red-500' : 'border-gray-300'}`} // Changed bg color to white
                 />
                 {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
               </div>
@@ -48,7 +48,7 @@ const LoginPage = () => {
                   {...register('password')}
                   type="password"
                   placeholder="Password"
-                  className={`border bg-black placeholder:text-white rounded-md p-2 ${errors.password ? 'border-red-500' : 'border-gray-900'}`}
+                  className={`border bg-white placeholder:text-black rounded-md p-2 ${errors.password ? 'border-red-500' : 'border-gray-300'}`} // Changed bg color to white
                 />
                 {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
               </div>
@@ -65,7 +65,7 @@ const LoginPage = () => {
                   </button>
                 </Link>
               </div>
-              <p className="text-center text-white mt-4">
+              <p className="text-center text-black mt-4"> {/* Changed text color to black */}
                 Dont have an account? <Link to="/register" className="text-blue-300 hover:underline">Register</Link>
               </p>
             </form>

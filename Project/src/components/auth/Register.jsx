@@ -29,19 +29,19 @@ const RegistrationPage = () => {
       style={{ background: `url(${LoginImg})`, backgroundSize: 'cover' }}
     >
       <div className="relative flex justify-center items-center h-full w-full backdrop-blur-sm p-4">
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 flex flex-col max-w-4xl w-full mx-auto p-6 bg-black rounded-lg shadow-lg">
-          <h1 className="text-2xl font-bold mb-4 text-center">Register</h1>
+        <div className="absolute inset-0 bg-black  bg-opacity-80"></div>
+        <div className="relative z-10 flex flex-col max-w-4xl w-full mx-auto p-6 bg-white rounded-lg shadow-lg">
+          <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">Register</h1>
           <div className='grid grid-cols-2 gap-4'>
             <div className='rounded-lg p-3'>
-              <img src={LoginImg} className='rounded-lg' alt="" />
+              <img src={LoginImg} className='rounded-lg' alt="Login" />
             </div>
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col">
                 <input
                   {...register('firstName')}
                   placeholder="First Name"
-                  className={`border bg-black placeholder:text-white text-white rounded-md p-2 ${errors.firstName ? 'border-red-500' : 'border-gray-900'}`}
+                  className={`border bg-white placeholder:text-gray-400 text-gray-800 rounded-md p-2 ${errors.firstName ? 'border-red-500' : 'border-gray-300'}`}
                 />
                 {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName.message}</p>}
               </div>
@@ -49,7 +49,7 @@ const RegistrationPage = () => {
                 <input
                   {...register('lastName')}
                   placeholder="Last Name"
-                  className={`border bg-black placeholder:text-white rounded-md p-2 ${errors.lastName ? 'border-red-500' : 'border-gray-900'}`}
+                  className={`border bg-white placeholder:text-gray-400 text-gray-800 rounded-md p-2 ${errors.lastName ? 'border-red-500' : 'border-gray-300'}`}
                 />
                 {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}
               </div>
@@ -57,7 +57,7 @@ const RegistrationPage = () => {
                 <input
                   {...register('phone')}
                   placeholder="Phone Number"
-                  className={`border bg-black placeholder:text-white rounded-md p-2 ${errors.phone ? 'border-red-500' : 'border-gray-900'}`}
+                  className={`border bg-white placeholder:text-gray-400 text-gray-800 rounded-md p-2 ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
                 />
                 {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
               </div>
@@ -66,7 +66,7 @@ const RegistrationPage = () => {
                   {...register('email')}
                   type="email"
                   placeholder="Email"
-                  className={`border bg-black placeholder:text-white rounded-md p-2 ${errors.email ? 'border-red-500' : 'border-gray-900'}`}
+                  className={`border bg-white placeholder:text-gray-400 text-gray-800 rounded-md p-2 ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                 />
                 {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
               </div>
@@ -75,27 +75,27 @@ const RegistrationPage = () => {
                   {...register('password')}
                   type="password"
                   placeholder="Password"
-                  className={`border bg-black placeholder:text-white rounded-md p-2 ${errors.password ? 'border-red-500' : 'border-gray-900'}`}
+                  className={`border bg-white placeholder:text-gray-400 text-gray-800 rounded-md p-2 ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
                 />
                 {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
               </div>
               <div className='flex justify-between'>
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 transition duration-200"
-              >
-                Register
-              </button>
-
-              <Link to="/" className="text-blue-500 hover:underline text-center ">
-                <button type="button" className="w-full bg-gray-500 text-white px-4 py-2 rounded-md mt-2 hover:bg-gray-600 transition duration-200">
-                  Back
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 transition duration-200"
+                >
+                  Register
                 </button>
-              </Link>
+
+                <Link to="/" className="text-blue-500 hover:underline text-center ">
+                  <button type="button" className="w-full bg-gray-300 text-gray-800 px-4 py-2 rounded-md mt-2 hover:bg-gray-400 transition duration-200">
+                    Back
+                  </button>
+                </Link>
               </div>
-            
-              <p className="text-center text-white mt-4">
-                Already have an account? <Link to="/login" className="text-blue-300 hover:underline">Login</Link>
+
+              <p className="text-center text-gray-800 mt-4">
+                Already have an account? <Link to="/login" className="text-blue-500 hover:underline">Login</Link>
               </p>
             </form>
           </div>

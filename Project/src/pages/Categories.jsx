@@ -30,7 +30,7 @@ const Categories = () => {
                   label={category.name}
                   onClick={() => console.log("Clicked", category.name)}
                   type={"button"}
-                  className="text-white hover:bg-gray-300 hover:text-black bg-gray-700 px-4 py-2 rounded-md"
+                  className="text-white hover:bg-gray-300 hover:text-black bg-black-700 px-4 py-2 rounded-md"
                 />
               </div>
             </div>
@@ -39,7 +39,7 @@ const Categories = () => {
                 label={category.name}
                 onClick={() => console.log("Clicked", category.name)}
                 type={"button"}
-                className="text-white bg-gray-700 px-4 py-2 rounded-md w-full hover:bg-gray-500"
+                className="text-white bg-black px-4 py-2 rounded-md w-full hover:bg-gray-500"
               />
             </div>
           </div>

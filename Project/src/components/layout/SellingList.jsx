@@ -8,8 +8,8 @@ const SellingList = () => {
   if (error) return <div>Error</div>;
 
   return (
-    <div className="bg-black text-white min-h-screen">
-      <div className="text-blue-400 font-bold text-4xl p-5 text-center mt-6">
+    <div className="bg-white text-black min-h-screen">
+      <div className="text-blue-600 font-bold text-4xl p-5 text-center mt-6">
         Best Seller
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-10">
@@ -18,7 +18,7 @@ const SellingList = () => {
             <div
               data-aos="zoom-in-up"
               key={item.id}
-              className="relative h-[400px] w-[300px] p-4 bg-balck border border-gray-900 shadow-md rounded-lg overflow-hidden group transition duration-300 ease-in-out transform hover:scale-105"
+              className="relative h-[400px] w-[300px] p-4 bg-white  border-gray-300 shadow-md rounded-lg overflow-hidden group transition duration-300 ease-in-out transform hover:scale-105"
             >
               <img
                 src={item.images[0]}
@@ -33,18 +33,18 @@ const SellingList = () => {
                   className="text-lg bg-blue-600 text-white hover:bg-white hover:text-blue-500 font-semibold py-2 px-4 rounded-lg"
                 />
               </button>
-              <div className="flex flex-col mt-2 text-gray-300">
+              <div className="flex flex-col mt-2 text-gray-800">
                 <div className="flex justify-between items-center">
                   <div className="font-bold">{item.brand}</div>
-                  <div className="text-blue-400 font-semibold">
+                  <div className="text-blue-600 font-semibold">
                     {item.price}$
                   </div>
                 </div>
-                <div className="text-gray-400">{item.category}</div>
+                <div className="text-gray-600">{item.category}</div>
               </div>
             </div>
           ))}
-        <div className="flex justify-center items-center h-[400px] w-[300px] p-4 bg-gray-800 shadow-md rounded-lg overflow-hidden group transition duration-300 ease-in-out transform hover:scale-105">
+        <div className="flex justify-center items-center h-[400px] w-[300px] p-4 bg-gray-100 shadow-md rounded-lg overflow-hidden group transition duration-300 ease-in-out transform hover:scale-105">
           <MyButton
             label={"More Products"}
             type={"button"}
