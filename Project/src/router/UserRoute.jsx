@@ -7,6 +7,7 @@ import Footer from "../components/layout/footer"
 import Brands from "../pages/Brand"
 import RegistrationPage from "../components/auth/Register"
 import LoginPage from "../components/auth/Login"
+import Cart from "../pages/Cart"
 
 const UserRoute = () => {
   return (
@@ -19,6 +20,7 @@ const UserRoute = () => {
       <Route path="/brand" element={<Brands/>}/>
       <Route path="/register" element={<RegistrationPage/>}/>
       <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/cart" element={<Cart/>}/>
 
     </Routes>
     <Footer/>

@@ -3,6 +3,7 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchComponent from "../common/SerchBar";
+import { MdOutlineShoppingBag } from "react-icons/md";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex top-0 bg-white fixed z-[99999] justify-between items-center w-[100%] m-auto py-4 text-black ">
+    <div className="flex top-0 bg-white fixed z-[999] justify-between items-center w-[100%] m-auto py-4 text-black ">
       <div className="flex gap-2 items-center mr-3">
         <LiaAdobe className="text-5xl text-black" />
         <div className="font-bold text-3xl hidden md:flex">Shezee</div>
@@ -52,7 +53,12 @@ const Navbar = () => {
       <SearchComponent />
 
       <div className="flex items-center gap-3 mr-10">
+        <Link to={"wishlist"}>        <MdOutlineShoppingBag className="text-2xl cursor-pointer text-black hover:text-gray-600 transition-colors duration-200"/>
+        </Link>
+
+        <Link to={"/cart"}>
         <FaShoppingCart className="text-2xl cursor-pointer text-black hover:text-gray-600 transition-colors duration-200" />
+        </Link>
         <div className="relative">
           <FaUser 
             className="text-2xl cursor-pointer text-black hover:text-gray-600 transition-colors duration-200"

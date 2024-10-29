@@ -15,7 +15,7 @@ const SearchComponent = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)} 
           placeholder="Search for products"
-          className="border border-gray-900 rounded-lg p-2 flex-grow bg-white text-black"
+          className="border  rounded-lg p-2 flex-grow bg-white text-black"
         />
       </form>
 

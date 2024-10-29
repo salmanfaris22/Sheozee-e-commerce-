@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
 import LoginImg from '../../assets/pexels-craytive-1456706.jpg'; // Update the path to your image
+import { useUserLogineAuth } from '../../hooks/AuthHook';
 
 // Validation schema using Yup
 const schema = yup.object().shape({
@@ -11,18 +12,19 @@ const schema = yup.object().shape({
 });
 
 const LoginPage = () => {
+  const{mutate}=useUserLogineAuth()
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data) => {
     console.log(data);
-    // Handle form submission (e.g., API call for login)
+    mutate(data)
   };
 
   return (
     <div
-      className="flex justify-center items-center m-auto fixed top-0 z-[99999] h-[100vh] w-[100vw]"
+      className="flex justify-center items-center m-auto fixed top-0 z-[999] h-[100vh] w-[100vw]"
       style={{ background: `url(${LoginImg})`, backgroundSize: 'cover' }}
     >
       <div className="relative flex justify-center items-center h-full w-full backdrop-blur-sm p-4">
