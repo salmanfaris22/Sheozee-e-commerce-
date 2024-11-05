@@ -4,11 +4,16 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchComponent from "../common/SerchBar";
 import { MdOutlineShoppingBag } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { useGetWishlist } from "../../hooks/wishlist-Hook";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const {data} =useGetWishlist()
+  const cartTotel=useSelector((state)=>state)
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -19,7 +24,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userid');
     if (userId) {
       setIsLoggedIn(true);
     }
@@ -52,13 +57,26 @@ const Navbar = () => {
 
       <SearchComponent />
 
-      <div className="flex items-center gap-3 mr-10">
-        <Link to={"wishlist"}>        <MdOutlineShoppingBag className="text-2xl cursor-pointer text-black hover:text-gray-600 transition-colors duration-200"/>
+      <div className="flex items-center gap-5 mr-10">
+        <Link to={"wishlist"}  className="relative flex items-center">     
+        {data?.length>=1 &&
+          <div className="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full transform translate-x-1/2 -translate-y-1/2">
+          {data?.length}
+        </div>
+        }
+           <MdOutlineShoppingBag className="text-2xl cursor-pointer text-black hover:text-gray-600 transition-colors duration-200"/>
+           
         </Link>
 
-        <Link to={"/cart"}>
-        <FaShoppingCart className="text-2xl cursor-pointer text-black hover:text-gray-600 transition-colors duration-200" />
-        </Link>
+        <Link to="/cart" className="relative flex items-center">
+        {cartTotel?.cartItem?.cartTotel>=1 &&
+          <div className="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full transform translate-x-1/2 -translate-y-1/2">
+          {cartTotel?.cartItem?.cartTotel}
+        </div>
+        }
+    
+      <FaShoppingCart className="text-2xl cursor-pointer text-black hover:text-gray-600 transition-colors duration-200" />
+    </Link>
         <div className="relative">
           <FaUser 
             className="text-2xl cursor-pointer text-black hover:text-gray-600 transition-colors duration-200"

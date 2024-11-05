@@ -8,7 +8,7 @@ export const useUserRegisterAuth = () => {
     return useMutation({
         mutationFn: async (user) => {
             console.log("Registering user:", user);
-            const res = await axios.post("http://localhost:8080/auth/register", user,{
+            const res = await axios.post("http://localhost:8080/v1/user/register", user,{
                 withCredentials: true,
               });
             return res.data;
@@ -16,15 +16,11 @@ export const useUserRegisterAuth = () => {
         onSuccess: (data) => {
             localStorage.setItem("userid", data.userID);
             localStorage.setItem("token", data.accesToken);
-
             toast.success(data?.message)
             navigate("/")
-
         },
         onError: (error) => {
-
             toast.warning(error?.response?.data?.message)
-      
         },
     });
 };
@@ -32,8 +28,7 @@ export const useUserLogineAuth = () => {
     const navigate =useNavigate()
     return useMutation({
         mutationFn: async (user) => {
-
-            const res = await axios.post("http://localhost:8080/auth/login", user,{
+            const res = await axios.post("http://localhost:8080/v1/user/login", user,{
                 withCredentials: true,
               });
             return res.data;

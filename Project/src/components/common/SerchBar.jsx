@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const SearchComponent = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const { data, loading, error } = useSearchApi(searchTerm); 
-  console.log(data);
+
   
   return (
     <div className="search-container w-[300px] z-[999999] rounded-lg relative">
@@ -18,7 +18,6 @@ const SearchComponent = () => {
           className="border  rounded-lg p-2 flex-grow bg-white text-black"
         />
       </form>
-
       {loading && <div className="text-white">Loading...</div>}
       {error && <div className="text-red-500">{error}</div>}
       {searchTerm !== "" && (

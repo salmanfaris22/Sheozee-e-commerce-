@@ -17,8 +17,8 @@ const FilterComponent = () => {
     category: category,
   });
 
-  const brands = ["nike", "puma", "adidas"];
-  const categories = ["men", "women"];
+  const brands = ["Nike", "Puma", "Adidas"];
+  const categories = ["Men", "Women"];
 
 
 

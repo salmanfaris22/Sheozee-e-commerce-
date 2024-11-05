@@ -5,15 +5,18 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { GetProduct } from "../features/products/ProductSlice";
 
-// Hook to get all products
+
+
+
 export const useGetAllProduct = () => {
+
     return useQuery({
         queryKey: ['products'],
-        queryFn: fetchProducts,
+        queryFn:fetchProducts,
     });
 };
 
-// Hook to get a single product by ID
+
 export const useGetProduct = (id) => {
     return useQuery({
         queryKey: ['product', id],
@@ -22,8 +25,9 @@ export const useGetProduct = (id) => {
     });
 };
 
-// Hook for searching products based on a search term
+
 export const useSearchApi = (searchTerm) => {
+
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -37,6 +41,7 @@ export const useSearchApi = (searchTerm) => {
 
             try {
                 const result = await searchProducts(searchTerm);
+
                 setData(result);
             } catch (err) {
                 setError(err.message || 'An error occurred while fetching data.');
@@ -47,13 +52,14 @@ export const useSearchApi = (searchTerm) => {
 
         fetchData();
     }, [searchTerm]);
-
+  
     return { data, loading, error };
 };
 
 // Hook for filtering products based on given filters
 export const useFilterProducts = (filters) => {
     const [data, setData] = useState([]);
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const dispatch =useDispatch()
@@ -61,7 +67,7 @@ export const useFilterProducts = (filters) => {
         const fetchData = async () => {
             setLoading(true);
             dispatch(GetProduct({loading}));
-           
+            
             setError(null);
             try { 
                 const result = await filterProducts(filters);

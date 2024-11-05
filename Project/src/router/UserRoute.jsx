@@ -8,6 +8,7 @@ import Brands from "../pages/Brand"
 import RegistrationPage from "../components/auth/Register"
 import LoginPage from "../components/auth/Login"
 import Cart from "../pages/Cart"
+import Wishlist from "../pages/WishList"
 
 const UserRoute = () => {
   return (
@@ -21,7 +22,7 @@ const UserRoute = () => {
       <Route path="/register" element={<RegistrationPage/>}/>
       <Route path="/login" element={<LoginPage/>}/>
       <Route path="/cart" element={<Cart/>}/>
-
+      <Route path="/wishlist" element={<Wishlist/>}/>
     </Routes>
     <Footer/>
    </>

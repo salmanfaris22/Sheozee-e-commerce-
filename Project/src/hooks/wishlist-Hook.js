@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+
 import { toast } from "react-toastify";
 
 
@@ -9,9 +10,8 @@ export const useAddRemoveWishList = () => {
     const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (product_id) => {
-
-       const userId= localStorage.getItem("userid")
-      const response = await axios.post(`http://localhost:8080/user/${userId}/wishlist?proId=${product_id[0]}`,
+ 
+      const response = await axios.post(`http://localhost:8080/v1/auth/wishlist/?productId=${product_id}`,
         {}, { withCredentials: true });
       return response.data;
     },
@@ -19,10 +19,7 @@ export const useAddRemoveWishList = () => {
         queryClient.invalidateQueries({
             queryKey:["wishlist"]
         })
-        toast.success(data.message)
-
-        
-
+       console.log(data.message)
     },
     onError: (error) => {
 
@@ -31,17 +28,17 @@ export const useAddRemoveWishList = () => {
   });
 };
 
+export const useGetWishlist = ()=>{
 
-
-export const useGetCartItem = ()=>{
     return useQuery({ 
         queryKey: ["wishlist"],
          queryFn: async()=>{
-            const userId= localStorage.getItem("userid")
-            const res = await axios.get(`http://localhost:8080/user/cartItems/${userId}`, {
+            
+            const res = await axios.get(`http://localhost:8080/v1/auth/wishlist/`, {
                 withCredentials: true,
               });
-            return res.data
+
+            return res?.data?.message
          },
        
      })

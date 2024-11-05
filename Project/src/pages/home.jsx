@@ -6,7 +6,10 @@ import MyButton from "../components/common/Botton";
 import Categories from "./Categories";
 import ProductList from "../components/layout/SellingList";
 
+
+
 const Home = () => {
+ 
   return (
     <div className="mt-[80px] bg-white text-black min-h-screen">
       <div className="p-4">
@@ -80,6 +83,11 @@ const Home = () => {
       </div>
       
       <ProductList />
+
+
+
+     
+
     </div>
   );
 };

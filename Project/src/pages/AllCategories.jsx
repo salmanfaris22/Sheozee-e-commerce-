@@ -5,18 +5,16 @@ import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/common/Loading';
 import { useEffect, useState } from 'react';
 import { useAddToCart } from '../hooks/Cart-hook';
-import { useAddRemoveWishList } from '../hooks/wishlist-Hook';
+import { useAddRemoveWishList, useGetWishlist } from '../hooks/wishlist-Hook';
 import { FaHeart } from "react-icons/fa";
 
 const AllCategories = () => {
     const { data, loading } = useSelector(state => state.product);
+    const {data:wislistss} =useGetWishlist()
     const { mutate: wishList } = useAddRemoveWishList();
     const [loadings, setLoading] = useState(!loading);
     const { mutate } = useAddToCart();
-    
-    // State to track wishlist items
-    const [wishlistItems, setWishlistItems] = useState(new Set());
-
+  
     useEffect(() => {
         setLoading(false);
         if (loading) {
@@ -29,14 +27,8 @@ const AllCategories = () => {
 
 
     const handleToggleWishlist = (itemId) => {
-        const updatedWishlist = new Set(wishlistItems);
-        if (updatedWishlist.has(itemId)) {
-            updatedWishlist.delete(itemId); 
-        } else {
-            updatedWishlist.add(itemId);
-        }
-        setWishlistItems(updatedWishlist);
-        wishList([itemId, updatedWishlist.has(itemId) ? "add" : "remove"]); 
+        console.log(itemId);
+        wishList(itemId); 
     };
 
     if (loadings) {
@@ -56,16 +48,19 @@ const AllCategories = () => {
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4'>
                 {data && data.map((item) => (
                     <div key={item.id} className="shadow-sm bg-white p-4 h-[350px] rounded-md relative">
-                        {/* Heart icon positioned at the top right corner */}
+
                         <div className='absolute top-2 right-2 z-10'>
+                   
+                       
                             <FaHeart 
-                                className={`text-3xl cursor-pointer ${wishlistItems.has(item.id) ? 'text-red-600' : 'text-gray-200'}`} 
+                      
+                                className={`text-3xl cursor-pointer ${wislistss?.filter((e)=>e.id==item.id).length!=0 || null? 'text-red-600' : 'text-gray-200'}`} 
                                 onClick={() => handleToggleWishlist(item.id)} 
                             />
                         </div>
                         <Link to={`/product/${item.id}`}>
                             <img
-                                src={item.images[0]}
+                                // src={item?.images[0]}
                                 alt={item.name}
                                 className="w-full h-48 object-cover rounded-md transition-transform duration-300 hover:scale-105"
                             />
