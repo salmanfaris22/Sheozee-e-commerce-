@@ -44,7 +44,8 @@ export const useSearchApi = (searchTerm) => {
 
                 setData(result);
             } catch (err) {
-                setError(err.message || 'An error occurred while fetching data.');
+              
+                setError(err?.message || 'An error occurred while fetching data.');
             } finally {
                 setLoading(false);
             }
@@ -75,7 +76,8 @@ export const useFilterProducts = (filters) => {
 
                 dispatch(GetProduct({result,loading,error}));
             } catch (err) {
-                setError(err.message || 'An error occurred while fetching filtered products.');
+                setError("err")
+                setError(err?.message || 'An error occurred while fetching filtered products.');
             } finally {
                 setLoading(false);
                

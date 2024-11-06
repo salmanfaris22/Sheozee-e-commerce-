@@ -3,35 +3,26 @@ import MyButton from '../components/common/Botton';
 import FilterBar from '../components/layout/FilterBar';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/common/Loading';
-import { useEffect, useState } from 'react';
 import { useAddToCart } from '../hooks/Cart-hook';
 import { useAddRemoveWishList, useGetWishlist } from '../hooks/wishlist-Hook';
 import { FaHeart } from "react-icons/fa";
 
 const AllCategories = () => {
-    const { data, loading } = useSelector(state => state.product);
+    const { data, loading,error } = useSelector(state => state.product);
     const {data:wislistss} =useGetWishlist()
     const { mutate: wishList } = useAddRemoveWishList();
-    const [loadings, setLoading] = useState(!loading);
     const { mutate } = useAddToCart();
-  
-    useEffect(() => {
-        setLoading(false);
-        if (loading) {
-            const timer = setTimeout(() => {
-                setLoading(false);
-            }, 1000);
-            return () => clearTimeout(timer);
-        }
-    }, [loading]);
-
-
     const handleToggleWishlist = (itemId) => {
-        console.log(itemId);
         wishList(itemId); 
     };
-
-    if (loadings) {
+    if (error) {
+        return (
+            <div className='h-screen flex items-center justify-center bg-white'>
+                error
+            </div>
+        );
+    }
+    if (loading) {
         return (
             <div className='h-screen flex items-center justify-center bg-white'>
                 <LoadingSpinner />
@@ -54,13 +45,15 @@ const AllCategories = () => {
                        
                             <FaHeart 
                       
-                                className={`text-3xl cursor-pointer ${wislistss?.filter((e)=>e.id==item.id).length!=0 || null? 'text-red-600' : 'text-gray-200'}`} 
+                                className={`text-3xl cursor-pointer ${wislistss?.filter((e)=>e.id==item.id).length!=0  && wislistss ? 'text-red-600' : 'text-gray-200'}`} 
                                 onClick={() => handleToggleWishlist(item.id)} 
                             />
                         </div>
+
                         <Link to={`/product/${item.id}`}>
                             <img
-                                // src={item?.images[0]}
+                             src={item?.images[0]?.url}
+                               
                                 alt={item.name}
                                 className="w-full h-48 object-cover rounded-md transition-transform duration-300 hover:scale-105"
                             />

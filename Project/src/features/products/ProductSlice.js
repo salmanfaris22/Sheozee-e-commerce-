@@ -17,14 +17,9 @@ export const productSlice = createSlice({
   reducers: {
     GetProduct: (state, action) => {
       state.loading=action.payload.loading
-    
+      state.loading=action.payload.error
       const res =action.payload?.result?.message
-      const products = res?.map((e) => ({
-        ...e,       
-        wislist: false 
-    }))
-    console.log("h",products)
-      state.data = products;
+      state.data = res;
     },
  
   },

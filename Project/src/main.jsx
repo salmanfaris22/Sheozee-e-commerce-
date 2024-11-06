@@ -8,7 +8,8 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css'; 
 import App from './App'; 
-import { store } from './App/store'; 
+import { store } from './App/store/store';
+
 
 
 const queryClient = new QueryClient();

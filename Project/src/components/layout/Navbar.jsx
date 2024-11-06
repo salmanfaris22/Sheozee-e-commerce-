@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchComponent from "../common/SerchBar";
 import { MdOutlineShoppingBag } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetWishlist } from "../../hooks/wishlist-Hook";
+import { TotleCart } from "../../features/cart/cart-Slice";
+import { useGetCartItem } from "../../hooks/Cart-hook";
 
 
 const Navbar = () => {
@@ -14,6 +16,10 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const {data} =useGetWishlist()
   const cartTotel=useSelector((state)=>state)
+  const {data:length} = useGetCartItem()
+  const dispatch =useDispatch()
+ 
+
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -28,7 +34,8 @@ const Navbar = () => {
     if (userId) {
       setIsLoggedIn(true);
     }
-  }, []);
+    dispatch(TotleCart(length?.items?.length))
+  }, [length]);
 
   const handleLogout = () => {
     localStorage.removeItem('userId');

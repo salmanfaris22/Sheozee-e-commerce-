@@ -12,7 +12,7 @@ export const  fetchProducts =async()=>{
 
 export const fetchProduct =async(id)=>{
     const res =await axios.get(`http://localhost:8080/v1/product/${id}`)
-    return res.data
+    return res.data?.message
 }
 
 

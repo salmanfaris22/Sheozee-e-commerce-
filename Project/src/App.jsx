@@ -1,19 +1,24 @@
 import './App.css'
 import UserRoute from './router/UserRoute'
-import { useGetCartItem } from './hooks/Cart-hook'
-import { useDispatch } from 'react-redux'
-import { TotleCart } from './features/cart/cart-Slice'
+import Navbar from './components/layout/Navbar'
+import { useState } from 'react'
+import NavBarAdmin from './admin/components/layout/SideBar'
+import AdminRout from './router/AdminRout'
+
 
 
 function App() {
-  const {data} = useGetCartItem()
-  const dispatch =useDispatch()
-  dispatch(TotleCart(data?.items?.length))
- 
+
+  const [admin,setAdmin]=useState(true)
   
   return (
     <>
-      <UserRoute/>
+    {admin ? 
+   <> <NavBarAdmin/>
+    <AdminRout/></>
+    :
+      <><Navbar/>
+      <UserRoute/></>}
     </>
   )
 }

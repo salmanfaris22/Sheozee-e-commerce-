@@ -11,7 +11,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     TotleCart: (state, action) => {
-      console.log("gh",action.payload);
+    
       state.cartTotel=action.payload
     },
   },

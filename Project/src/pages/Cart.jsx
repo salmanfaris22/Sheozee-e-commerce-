@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAddToCart, useGetCartItem } from "../hooks/Cart-hook";
 import { useDispatch } from "react-redux";
 import { TotleCart } from "../features/cart/cart-Slice";
+import { useEffect, useState } from "react";
 
 
 const Cart = () => {
@@ -11,7 +12,7 @@ const Cart = () => {
   const {data} = useGetCartItem()
     const dispath = useDispatch()
   const {mutate} =useAddToCart()
-  
+  const [carts,setCarts]=useState([])
   const navigate = useNavigate();
 
   const handleIncreaseQuantity = (productId) => {
@@ -30,18 +31,20 @@ const Cart = () => {
   const handleCheckout = () => {
     navigate("/checkout");
   };
-
+useEffect(()=>{
   const cart = data?.items?.sort((a, b) => a.product_id - b.product_id) || [];
- 
+  setCarts(cart)
   dispath(TotleCart(cart?.length))
+},[data])
+
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Your Cart</h1>
-      {cart=== 0 ? (
+      {carts=== 0 ? (
         <p className="text-center text-gray-600">Your cart is empty.</p>
       ) : (
         <div className="space-y-4">
-          {cart.map((item) => (
+          {carts?.map((item) => (
             <div key={item.product_id} className="flex items-center border p-4 rounded-lg shadow-md bg-white">
               <img
                 // src={item.images[0]}
@@ -55,6 +58,7 @@ const Cart = () => {
                   <button
                     className="px-2 py-1 bg-gray-200 rounded-md hover:bg-gray-300"
                     onClick={() => handleDecreaseQuantity(item.product_id)}
+                    disabled={item.quantity <= 1}
                   >
                     -
                   </button>

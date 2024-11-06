@@ -59,25 +59,26 @@ const ProductPage = () => {
         <div className="rounded-lg grid grid-cols-1 md:grid-cols-2  shadow-md bg-white overflow-hidden p-4 gap-6 md:gap-10">
 
           <div className="grid grid-cols-3 gap-4 p-2">
-            <img
+          <img
               className="w-full col-span-3 bg-gray-200 h-[400px] object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
-              src={data?.images[0]}
+              src={data?.images[0]?.url}
               alt={data?.name}
             />
+            
             <img
               className="w-full h-[100px] col-span-1 bg-gray-200  object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
-              src={data?.images[0]}
+              src={data?.images[0]?.url}
               alt={data?.name}
             />
            
            <img
               className="w-full h-[100px] col-span-1 bg-gray-200  object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
-              src={data?.images[0]}
+              src={data?.images[0]?.url}
               alt={data?.name}
             />
                <img
               className="w-full h-[100px] col-span-1 bg-gray-200  object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
-              src={data?.images[0]}
+              src={data?.images[0]?.url}
               alt={data?.name}
             />
 
@@ -107,7 +108,7 @@ const ProductPage = () => {
               ))}
             </div>
             <div className="flex justify-between items-center mt-4">
-              <div className="font-bold text-3xl">${data?.price.toFixed(2)}</div>
+              <div className="font-bold text-3xl">${data?.price}</div>
               <div className="flex justify-center items-center gap-2">
                 <MyButton
                   label="+"

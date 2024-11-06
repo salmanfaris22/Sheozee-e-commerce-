@@ -1,32 +1,36 @@
-import { Route, Routes } from "react-router-dom"
-import Navbar from "../components/layout/Navbar"
-import Home from "../pages/home"
-import AllCategories from "../pages/AllCategories"
-import ProductPage from "../pages/ProductPage"
-import Footer from "../components/layout/footer"
-import Brands from "../pages/Brand"
-import RegistrationPage from "../components/auth/Register"
-import LoginPage from "../components/auth/Login"
-import Cart from "../pages/Cart"
-import Wishlist from "../pages/WishList"
+import { Route, Routes } from "react-router-dom";
+import  { Suspense, lazy } from "react";
+import Footer from "../components/layout/footer";
+import LoadingSpinner from "../components/common/Loading";
+
+// Use lazy loading for pages
+const Home = lazy(() => import("../pages/home"));
+const AllCategories = lazy(() => import("../pages/AllCategories"));
+const ProductPage = lazy(() => import("../pages/ProductPage"));
+const Brands = lazy(() => import("../pages/Brand"));
+const RegistrationPage = lazy(() => import("../components/auth/Register"));
+const LoginPage = lazy(() => import("../components/auth/Login"));
+const Cart = lazy(() => import("../pages/Cart"));
+const Wishlist = lazy(() => import("../pages/WishList"));
 
 const UserRoute = () => {
   return (
-   <>
-   <Navbar/>
-     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/allCategories" element={<AllCategories/>}/>
-      <Route path="/product/:id" element={<ProductPage/>}/>
-      <Route path="/brand" element={<Brands/>}/>
-      <Route path="/register" element={<RegistrationPage/>}/>
-      <Route path="/login" element={<LoginPage/>}/>
-      <Route path="/cart" element={<Cart/>}/>
-      <Route path="/wishlist" element={<Wishlist/>}/>
-    </Routes>
-    <Footer/>
-   </>
-  )
-}
+    <>
+      <Suspense fallback={<LoadingSpinner/>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/allCategories" element={<AllCategories />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/brand" element={<Brands />} />
+          <Route path="/register" element={<RegistrationPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+        </Routes>
+        <Footer />
+      </Suspense>
+    </>
+  );
+};
 
-export default UserRoute
+export default UserRoute;
