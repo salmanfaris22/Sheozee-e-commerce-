@@ -1,25 +1,16 @@
 import { useState } from "react";
 import { Si4Chan } from "react-icons/si";
 import { FaUser } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaUsersBetweenLines } from "react-icons/fa6";
 import { BiSolidCartAdd } from "react-icons/bi";
-import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { BiSolidDashboard } from "react-icons/bi";
+import { AiFillProduct } from "react-icons/ai";
 
 // eslint-disable-next-line react/prop-types
-const NavBarAdmin = ({ setAdmin }) => {
-  const navigate = useNavigate();
+const NavBarAdmin = () => {
   const [open, setOpen] = useState(false);
-
-  const handleLockOut = () => {
-    localStorage.clear("admin");
-    navigate("/");
-    window.location.reload()
-    setAdmin(false);
-  };
-
   return (
     <div
       className=" fixed top-0 z-[999999]"
@@ -39,16 +30,14 @@ const NavBarAdmin = ({ setAdmin }) => {
           <FaUsersBetweenLines className="text-3xl  block " />
           <li className={`${open ? "block" : "hidden"}`}>Users</li>
         </Link>
-
+        <Link to={"/allPrudcut"} className="flex mt-10 p-1  gap-4 ">
+          <AiFillProduct className="text-3xl  block " />
+          <li className={`${open ? "block" : "hidden"}`}>All Product</li>
+        </Link>
         <Link to={"/AddProduct"} className="flex mt-10 p-1  gap-4 ">
           <BiSolidCartAdd className="text-3xl  block " />
           <li className={`${open ? "block" : "hidden"}`}>AddProduct</li>
         </Link>
-        <Link to={"/DeletProduct"} className="flex mt-10 p-1  gap-4 ">
-          <MdOutlineProductionQuantityLimits className="text-3xl  block " />
-          <li className={`${open ? "block" : "hidden"}`}> Edit/Remove</li>
-        </Link>
-
         <Link to={"/"} className="flex mt-10 p-1  gap-4 ">
           <FaEye className="text-3xl  block " />
           <li className={`${open ? "block" : "hidden"}`}>Trak Orders</li>
@@ -56,12 +45,12 @@ const NavBarAdmin = ({ setAdmin }) => {
         <Link to={"/DashBoard"} className="flex mt-10 p-1  gap-4 ">
           <BiSolidDashboard className="text-3xl  block " />
           <li className={`${open ? "block" : "hidden"}`}>DashBoard</li>
-        </Link>
-
-        <button onClick={handleLockOut} className="flex mt-10 p-1  gap-4 ">
+     
+          </Link>
+        <Link to={"/login"} className="flex mt-10 p-1  gap-4 ">
           <FaUser className="text-3xl  block " />
           <li className={`${open ? "block" : "hidden"}`}>LogOut</li>
-        </button>
+        </Link>
       </div>
     </div>
   );

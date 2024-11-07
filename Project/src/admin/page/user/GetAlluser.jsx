@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import { useAdminUserget } from "../../../hooks/admin-user-hook";
+import { useAdminUserget, useUserBlockOrUnblock } from "../../../hooks/admin-user-hook";
 
 const GetAlluser = () => {
   const { data } = useAdminUserget();
+  const {mutate}= useUserBlockOrUnblock()
 
 
-
-  const handleDeleteUser = (userId) => {
+  const handleDeleteUser = (userId,status) => {
     console.log(`Deleting user with ID: ${userId}`);
-
+    mutate({userId,status})
   };
 
  
@@ -64,12 +64,20 @@ const GetAlluser = () => {
             </button>
 
             </Link>
-            <button
-              onClick={() => handleDeleteUser(user.id)}
+
+            {!user?.ban ?  <button
+              onClick={() => handleDeleteUser(user.id,"true")}
               className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600"
             >
               Block User
-            </button>
+            </button> : <button
+              onClick={() => handleDeleteUser(user.id,"false")}
+              className="bg-black text-white p-2 rounded-lg hover:bg-black"
+            >
+              Unblock User
+            </button> }
+           
+           
           </div>
         </div>
       ))}

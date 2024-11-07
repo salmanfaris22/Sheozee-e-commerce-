@@ -32,7 +32,27 @@ export const useGetUserById = (userId)=>{
     })
 }
 
-
+export const useUserBlockOrUnblock = () => {
+    const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({userId,status}) => {
+ 
+      const response = await axios.put(`http://localhost:8080/v1/auth/user/block?user_id=${userId}&status=${status}`,
+      {}, { withCredentials: true });
+      return response.data;
+    },
+    onSuccess: (data) => {
+        queryClient.invalidateQueries({
+            queryKey:["users"]
+        })
+            toast.success(data?.message);
+      
+    },
+    onError: (error) => {
+      toast.warning(error?.response?.data?.message);
+    },
+  });
+};
 export const useUpdateUserInfo = (userId) => {
     const queryClient = useQueryClient();
   return useMutation({

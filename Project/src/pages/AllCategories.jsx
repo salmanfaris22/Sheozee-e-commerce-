@@ -52,7 +52,7 @@ const AllCategories = () => {
 
                         <Link to={`/product/${item.id}`}>
                             <img
-                             src={item?.images[0]?.url}
+                              src={item?.images?.filter((e)=>e?.is_main==true)[0]?.url || item?.images[0]?.url}
                                
                                 alt={item.name}
                                 className="w-full h-48 object-cover rounded-md transition-transform duration-300 hover:scale-105"

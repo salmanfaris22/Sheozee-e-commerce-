@@ -1,9 +1,16 @@
+import { Link } from "react-router-dom";
 import { useGetAllProduct } from "../../../hooks/Product-Hoosk";
+import { useDeleteProduct } from "../../../hooks/admin-product-add";
 
 
 
 const AllProducts = () => {
     const { data } = useGetAllProduct();
+   const {mutate}= useDeleteProduct()
+  const handleDeleteProduct = (product_id) => {
+    mutate(product_id)
+  };
+
   return (
     <div className="ml-[80px] flex flex-col gap-2 ">
 {data?.map((e)=>{
@@ -22,9 +29,18 @@ const AllProducts = () => {
            <div className="flex justify-end">
            <img  className="h-[100px] rounded-lg w-[100px] object-cover" src={e?.images[0]?.url} alt="" />
            </div>
-           <div className="flex justify-between col-span-3 bg-gray-300 rounded-lg p-2" >
+           <div className="flex items-center justify-between col-span-3 bg-gray-300 rounded-lg p-2" >
+                <div className="flex gap-3 justify-between w-[40%]">
                 <span>id:{e?.id}</span>
-                <span>created_at:{e?.created_at}</span>
+                <span>created_at:{new Date(e?.created_at).toLocaleDateString()}</span>
+                </div>
+                <div className="flex gap-2">
+                    <Link to={`/editProduct/${e?.id}`}>
+                  
+                    <button className=" bg-green-500 hover:bg-green-600 font-bold text-white p-2 rounded-lg">Edit Product</button>  </Link>
+                    <button onClick={()=>handleDeleteProduct(e?.id)} className=" bg-red-500 hover:bg-red-600 font-bold text-white p-2 rounded-lg">Remove Product</button>
+                </div>
+
            </div>
         </div>
     )

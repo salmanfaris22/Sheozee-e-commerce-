@@ -5,6 +5,7 @@ import AllProducts from "../admin/page/product/GetAllProduct"
 import GetAlluser from "../admin/page/user/GetAlluser"
 import UserInfo from "../admin/page/user/UserInfo"
 import UpdateUser from "../admin/page/user/UpdateUser"
+import EditProduct from "../admin/page/product/EditProduct"
 
 
 
@@ -18,7 +19,8 @@ const AdminRout = () => {
           <Route path="/user" element={<GetAlluser/>}/>
           <Route path="/userInfo/:id" element={<UserInfo/>}/>
           <Route path="/updateUser/:id" element={<UpdateUser/>}/>
-          
+          <Route path="/editProduct/:id" element={<EditProduct/>}/>
+      
         </Routes>
     </>
   )

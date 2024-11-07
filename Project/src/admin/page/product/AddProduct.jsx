@@ -74,14 +74,6 @@ const AddProduct = () => {
               placeholder="Product Name"
               required
             />
-             <ReusableInput
-              type="text"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="description"
-              required
-            />
             <ReusableInput
               type="number"
               name="price"

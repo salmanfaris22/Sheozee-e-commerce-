@@ -1,20 +1,23 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetAllProduct, useGetProduct } from "../hooks/Product-Hoosk";
 import MyButton from "../components/common/Botton";
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
+import { useAddToCart } from "../hooks/Cart-hook";
+import { useAddRemoveWishList, useGetWishlist } from "../hooks/wishlist-Hook";
 
 const ProductPage = () => {
   const { id } = useParams();
   const productID = Number(id);
   const { data } = useGetProduct(productID);
   const { data: products } = useGetAllProduct();
+  const {data:wislistss} =useGetWishlist()
+  const { mutate:cart } = useAddToCart();
+  const { mutate:wislist } = useAddRemoveWishList();
+  const [quantity, setQuantity] = useState(1);
 
+  const navigate  =useNavigate()
 
-  const [quantity, setQuantity] = useState(0);
-
-
-  const [isWishlisted, setIsWishlisted] = useState(false);
 
 
   const increaseQuantity = () => {
@@ -30,28 +33,18 @@ const ProductPage = () => {
   };
 
 
-  const addToCart = () => {
-    console.log(`Added ${quantity} of ${data?.name} to cart`);
+
+
+  const buyNow = (id,qty,price) => {
+      navigate(`/byproduct/${id}/${qty}/${price}`)
   };
 
-  // Function to handle Buy Now
-  const buyNow = () => {
-    if (quantity > 0) {
-      console.log(`Buying ${quantity} of ${data?.name}`);
-    } else {
-      console.log("Select a quantity to buy");
-    }
-  };
 
-  // Function for Notify Me
   const notifyMe = () => {
     console.log(`Notify me when ${data?.name} is back in stock`);
   };
 
-  // Function to toggle wishlist
-  const toggleWishlist = () => {
-    setIsWishlisted((prev) => !prev);
-  };
+
 
   return (
     <div className="min-h-screen mt-[80px]  bg-white text-black w-full">
@@ -61,7 +54,7 @@ const ProductPage = () => {
           <div className="grid grid-cols-3 gap-4 p-2">
           <img
               className="w-full col-span-3 bg-gray-200 h-[400px] object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
-              src={data?.images[0]?.url}
+              src={data?.images?.filter((e)=>e?.is_main==true)[0]?.url || data?.images[0]?.url}
               alt={data?.name}
             />
             
@@ -86,10 +79,11 @@ const ProductPage = () => {
 
           <div className="flex flex-col gap-2 justify-between p-6">
             <div className="flex justify-end p-2 ">
-              <FaHeart
-                className={`text-4xl cursor-pointer ${isWishlisted ? 'text-red-500' : 'text-gray-500'}`}
-                onClick={toggleWishlist}
-              />
+            <FaHeart 
+                      
+                      className={`text-3xl cursor-pointer ${wislistss?.find((e)=>e?.id==data?.id) ? 'text-red-600' : 'text-gray-200'}`} 
+                      onClick={() => wislist(data.id)} 
+                  />
             </div>
             <div className="flex justify-between text-gray-600 font-bold">
               <span>{data?.category}</span>
@@ -118,6 +112,7 @@ const ProductPage = () => {
                 <span className="text-lg">{quantity}</span>
                 <MyButton
                   label="-"
+                  disabled={quantity<=1}
                   onClick={decreaseQuantity}
                   className="bg-blue-500 hover:bg-blue-600 text-white font-bold text-2xl rounded-lg w-10"
                 />
@@ -127,13 +122,15 @@ const ProductPage = () => {
               <MyButton
                 type="button"
                 label="Add to Cart"
-                onClick={addToCart}
+                onClick={()=>cart([data.id,1,"add"])}
                 className="bg-blue-500 hover:bg-white hover:border hover:border-blue-500 hover:text-blue-500 text-white font-bold rounded-lg w-full"
               />
               {Number(data?.stock) > 0 ? (
+                
                 <MyButton
+                  
                   label="Buy Now"
-                  onClick={buyNow}
+                  onClick={()=>buyNow(data?.id,quantity,data?.price)}
                   className="bg-blue-500 hover:bg-blue-600 w-full text-white font-bold rounded-lg"
                 />
               ) : (
@@ -148,7 +145,7 @@ const ProductPage = () => {
         </div>
       </div>
 
-      {/* Related Products Scrollable Section */}
+
       <div className="flex overflow-x-auto p-4 space-x-4 lg:w-[90%] lg:m-auto">
         {products?.map((e) => (
           <div key={e.id} className="flex-shrink-0 h-[300px] w-[250px] bg-white border border-gray-300 rounded-lg shadow-lg">

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import  { Suspense, lazy } from "react";
 import Footer from "../components/layout/footer";
 import LoadingSpinner from "../components/common/Loading";
+import ByProduct from "../pages/ByProduct";
 
 // Use lazy loading for pages
 const Home = lazy(() => import("../pages/home"));
@@ -26,8 +27,10 @@ const UserRoute = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/byproduct/:id/:qty/:price" element={<ByProduct />} />
         </Routes>
         <Footer />
+        
       </Suspense>
     </>
   );

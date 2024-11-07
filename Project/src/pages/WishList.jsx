@@ -1,11 +1,12 @@
-import { useGetWishlist } from "../hooks/wishlist-Hook";
+import { useAddToCart } from "../hooks/Cart-hook";
+import { useAddRemoveWishList, useGetWishlist } from "../hooks/wishlist-Hook";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 
 const Wishlist = () => {
     const { data } = useGetWishlist();
-
-
+    const { mutate:cart } = useAddToCart();
+    const { mutate } = useAddRemoveWishList();
    
 
     return (
@@ -20,18 +21,17 @@ const Wishlist = () => {
                             <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out">
                                 <div className="relative group">
                                     <img
-                                        src={item.images[0]}
+                             src={item?.images?.filter((e)=>e?.is_main==true)[0]?.url || item?.images[0]?.url}
                                         alt={item.product_name}
                                         className="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
                                     />
                                     <button
-
                                         className="absolute top-2 right-2 text-red-500 text-xl"
                                     >
                                         {data?.some((wishItem) => wishItem.id === item.id) ? (
-                                            <FaHeart />
+                                            <FaHeart onClick={()=>mutate(item.id)} />
                                         ) : (
-                                            <FaRegHeart />
+                                            <FaRegHeart  onClick={()=>mutate(item.id)}/>
                                         )}
                                     </button>
                                 </div>
@@ -41,7 +41,7 @@ const Wishlist = () => {
                                     </h3>
                                     <p className="text-gray-600">${item.price}</p>
                                 </div>
-                                <button className="bg-blue-500 text-white w-full py-2 rounded-b-lg hover:bg-blue-600">
+                                <button onClick={()=>cart([item.id,1,"add"])} className="bg-blue-500 text-white w-full py-2 rounded-b-lg hover:bg-blue-600">
                                     Add to Cart
                                 </button>
                             </div>

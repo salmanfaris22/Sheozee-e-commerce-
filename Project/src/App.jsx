@@ -9,7 +9,7 @@ import AdminRout from './router/AdminRout'
 
 function App() {
 
-  const [admin,setAdmin]=useState(true)
+  const [admin,setAdmin]=useState(false)
   
   return (
     <>

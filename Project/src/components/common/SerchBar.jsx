@@ -21,7 +21,7 @@ const SearchComponent = () => {
       {loading && <div className="text-white">Loading...</div>}
       {error && <div className="text-red-500">{error}</div>}
       {searchTerm !== "" && (
-        <div className="results mt-4  absolute bg-white rounded-lg text-white w-[100%] p-2 left-0 overflow-auto max-h-[400px] ">
+        <div className="results mt-4   absolute bg-white rounded-lg text-white w-[500px] p-2 left-0 overflow-auto max-h-[400px] ">
           {data?.length > 0 ? (
             data.map((product) => (
               <div key={product.id} onClick={() => setSearchTerm("")} className="border z-[999999] rounded p-4 mb-2 flex justify-between bg-white hover:bg-gray-100">
@@ -30,7 +30,10 @@ const SearchComponent = () => {
                     <h2 className="font-bold text-black">{product.name}</h2>
                     <p className="text-gray-700">${product.price.toFixed(2)}</p>
                   </div>
-                  <img src={product.images[0]} className="h-[50px]" alt="" />
+
+                  <img 
+            src={product?.images?.filter((e)=>e?.is_main==true)[0]?.url || product?.images[0]?.url}
+                   className="h-[50px] w-[70px] object-cover" alt="" />
                 </Link>
               </div>
             ))
