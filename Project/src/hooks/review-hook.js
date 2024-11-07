@@ -21,7 +21,8 @@ export const useAddReview = (product_id) => {
         toast.success(data.message)     
     },
     onError: (error) => {
-      toast.warning(error?.response?.data?.message);
+
+      toast.warning(error?.response?.data?.error);
     },
   });
 };
@@ -43,7 +44,7 @@ export const useReviewEdit = () => {
         toast.success(data.message)     
     },
     onError: (error) => {
-      toast.warning(error?.response?.data?.message);
+      toast.warning(error?.response?.data?.error);
     },
   });
 };
@@ -63,7 +64,8 @@ export const useDeeleteReview = () => {
         toast.success(data.message)     
     },
     onError: (error) => {
-      toast.warning(error?.response?.data?.message);
+        
+      toast.warning(error?.response?.data?.error);
     },
   });
 };

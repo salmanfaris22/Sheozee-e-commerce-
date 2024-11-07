@@ -22,7 +22,7 @@ const ProductPage = () => {
   const navigate = useNavigate();
   const {mutate:deleteReview}=useDeeleteReview()
   const { mutate: reviewAdd } = useAddReview(id); 
-   const{mutate:updateReview} =    useReviewEdit(isEditing)
+  const{mutate:updateReview} =    useReviewEdit(isEditing)
   const increaseQuantity = () => {
     if (data?.stock !== undefined && quantity < data.stock) {
       setQuantity((prev) => prev + 1);
@@ -229,7 +229,10 @@ const ProductPage = () => {
               </div>
             </div>
             <p className="text-gray-600">{e?.comment}</p>
+            {localStorage.getItem("user_id") == e?.user_id &&
             <div className="flex justify-end gap-2">
+            
+
               <MyButton
                 label="Edit"
                 onClick={() => handleEditReview(e,e.ID)}
@@ -240,7 +243,7 @@ const ProductPage = () => {
                 onClick={() => handleDeleteReview(e?.ID)}
                 className="bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg"
               />
-            </div>
+            </div>}
           </div>
         ))}
 

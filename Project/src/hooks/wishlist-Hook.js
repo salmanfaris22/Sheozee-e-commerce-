@@ -23,7 +23,7 @@ export const useAddRemoveWishList = () => {
     },
     onError: (error) => {
 
-      toast.warning(error?.response?.data?.message);
+      toast.warning(error?.response?.data?.error);
     },
   });
 };

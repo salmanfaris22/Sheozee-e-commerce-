@@ -18,7 +18,8 @@ export const useAddToCart = () => {
         toast.success(data.message)     
     },
     onError: (error) => {
-      toast.warning(error?.response?.data?.message);
+      console.log(error.response);
+      toast.warning(error?.response?.data?.error);
     },
   });
 };

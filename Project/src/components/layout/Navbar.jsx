@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetWishlist } from "../../hooks/wishlist-Hook";
 import { TotleCart } from "../../features/cart/cart-Slice";
 import { useGetCartItem } from "../../hooks/Cart-hook";
+import { useLogoutUser } from "../../hooks/AuthHook";
 
 
 const Navbar = () => {
@@ -18,7 +19,7 @@ const Navbar = () => {
   const cartTotel=useSelector((state)=>state)
   const {data:length} = useGetCartItem()
   const dispatch =useDispatch()
- 
+  const {mutate}= useLogoutUser()
 
 
   const toggleSidebar = () => {
@@ -30,17 +31,14 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const userId = localStorage.getItem('userid');
+    const userId = localStorage.getItem('user_id');
     if (userId) {
       setIsLoggedIn(true);
     }
     dispatch(TotleCart(length?.items?.length))
-  }, [length]);
+  }, [length,mutate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('userId');
-    setIsLoggedIn(false);
-  };
+
 
   return (
     <div className="flex top-0 bg-white fixed z-[999] justify-between items-center w-[100%] m-auto py-4 text-black ">
@@ -105,9 +103,12 @@ const Navbar = () => {
                   <Link to="/profile">
                     <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Profile</div>
                   </Link>
+                  <Link to="/myOrder">
+                    <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">My order</div>
+                  </Link>
                   <div 
                     className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                    onClick={handleLogout}
+                    onClick={()=>mutate()}
                   >
                     Logout
                   </div>
