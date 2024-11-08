@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 
 export const AdminProducrAdd = () => {
+    const navigate =useNavigate()
     return useMutation({
         mutationFn: async (product) => {
             const res = await axios.post("http://localhost:8080/v1/auth/product/add", product,{
@@ -16,6 +17,7 @@ export const AdminProducrAdd = () => {
         },
         onSuccess: (data) => {
             toast.success(data?.message)
+            navigate("/allPrudcut")
         },
         onError: (error) => {
             toast.warning(error?.response?.data?.message)
@@ -26,13 +28,17 @@ export const useEditsProduct = (id) => {
     const navigate =useNavigate()
     return useMutation({
         mutationFn: async (product) => {
-            const res = await axios.put(`http://localhost:8080/v1/auth/product/update?product_id=${id}`, product,{
+            const updatedFormData = {
+                ...product,
+                price: parseFloat(product.price),
+                stock: parseInt(product.stock, 10),
+              };
+            const res = await axios.put(`http://localhost:8080/v1/auth/product/update?product_id=${id}`, updatedFormData,{
                 withCredentials: true,
               });
             return res.data;
         },
         onSuccess: () => {
-
             toast.success("product updated ")
             navigate("/allPrudcut")
         },

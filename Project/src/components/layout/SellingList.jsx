@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useGetAllProduct } from "../../hooks/Product-Hoosk";
 import MyButton from "../common/Botton";
+import LoadingSpinner from "../common/Loading";
 
 const SellingList = () => {
   const { data, isLoading, error } = useGetAllProduct();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div><LoadingSpinner/></div>;
   if (error) return <div>Error</div>;
 
   return (

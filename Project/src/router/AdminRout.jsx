@@ -6,6 +6,8 @@ import GetAlluser from "../admin/page/user/GetAlluser"
 import UserInfo from "../admin/page/user/UserInfo"
 import UpdateUser from "../admin/page/user/UpdateUser"
 import EditProduct from "../admin/page/product/EditProduct"
+import AllOrder from "../admin/page/order/AllOrder"
+import EditOrder from "../admin/page/order/EditOrder"
 
 
 
@@ -20,7 +22,10 @@ const AdminRout = () => {
           <Route path="/userInfo/:id" element={<UserInfo/>}/>
           <Route path="/updateUser/:id" element={<UpdateUser/>}/>
           <Route path="/editProduct/:id" element={<EditProduct/>}/>
-      
+          <Route path="/" element={<AllOrder/>}/>
+          <Route path="/:id" element={<EditOrder/>}/>
+          
+          
         </Routes>
     </>
   )

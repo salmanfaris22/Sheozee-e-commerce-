@@ -9,8 +9,8 @@ const AddProduct = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    price: '',
-    stock: '',
+    price: 0,
+    stock: 0,
     is_available: false,
     company_name: '',
     brand: '',
@@ -23,7 +23,7 @@ const AddProduct = () => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === 'checkbox' ? checked : name === 'price' || name === 'stock' ? Number(value) : value,
     }));
   };
 
@@ -66,30 +66,59 @@ const AddProduct = () => {
       <div className="flex space-x-8">
         <div className="w-full">
           <form onSubmit={handleSubmit} className="space-y-6 min-w-[400px]">
-            <ReusableInput
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Product Name"
-              required
-            />
-            <ReusableInput
-              type="number"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              placeholder="Price"
-              required
-            />
-            <ReusableInput
-              type="number"
-              name="stock"
-              value={formData.stock}
-              onChange={handleChange}
-              placeholder="Stock Quantity"
-            />
-            <label className="flex items-center space-x-2">
+
+            <div>
+              <label htmlFor="name" className="block mb-1 font-medium">Product Name</label>
+              <ReusableInput
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Product Name"
+                required
+              />
+            </div>
+            
+
+            <div>
+              <label htmlFor="description" className="block mb-1 font-medium">Description</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Product Description"
+                rows="4"
+                className="w-full p-2 border rounded-md shadow-sm focus:ring focus:ring-green-300"
+              />
+            </div>
+            
+
+            <div>
+              <label htmlFor="price" className="block mb-1 font-medium">Price</label>
+              <ReusableInput
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                placeholder="Price"
+                required
+              />
+            </div>
+
+
+            <div>
+              <label htmlFor="stock" className="block mb-1 font-medium">Stock Quantity</label>
+              <ReusableInput
+                type="number"
+                name="stock"
+                value={formData.stock}
+                onChange={handleChange}
+                placeholder="Stock Quantity"
+              />
+            </div>
+
+
+            <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="is_available"
@@ -97,37 +126,60 @@ const AddProduct = () => {
                 onChange={handleChange}
                 className="form-checkbox h-5 w-5 text-green-500"
               />
-              <span>Is Available</span>
-            </label>
-            <ReusableInput
-              type="text"
-              name="company_name"
-              value={formData.company_name}
-              onChange={handleChange}
-              placeholder="Company Name"
-            />
-            <ReusableSelect
-              name="brand"
-              value={formData.brand}
-              onChange={handleChange}
-              options={['Nike', 'Puma', 'Adidas']}
-              placeholder="Select Brand"
-              required
-            />
-            <ReusableSelect
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              options={['Men', 'Women']}
-              placeholder="Select Category"
-              required
-            />
-            <ReusableInput
-              type="text"
-              placeholder="Size (e.g., M, L, XL)"
-              onChange={handleSizeChange}
-            />
+              <label htmlFor="is_available" className="font-medium">Is Available</label>
+            </div>
+
+
             <div>
+              <label htmlFor="company_name" className="block mb-1 font-medium">Company Name</label>
+              <ReusableInput
+                type="text"
+                name="company_name"
+                value={formData.company_name}
+                onChange={handleChange}
+                placeholder="Company Name"
+              />
+            </div>
+
+
+            <div>
+              <label htmlFor="brand" className="block mb-1 font-medium">Brand</label>
+              <ReusableSelect
+                name="brand"
+                value={formData.brand}
+                onChange={handleChange}
+                options={['Nike', 'Puma', 'Adidas']}
+                placeholder="Select Brand"
+                required
+              />
+            </div>
+
+
+            <div>
+              <label htmlFor="category" className="block mb-1 font-medium">Category</label>
+              <ReusableSelect
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                options={['Men', 'Women']}
+                placeholder="Select Category"
+                required
+              />
+            </div>
+
+
+            <div>
+              <label htmlFor="size" className="block mb-1 font-medium">Size</label>
+              <ReusableInput
+                type="text"
+                placeholder="Size (e.g., M, L, XL)"
+                onChange={handleSizeChange}
+              />
+            </div>
+
+
+            <div>
+              <label className="block mb-1 font-medium">Images</label>
               {formData.images.map((image, index) => (
                 <ReusableImageInput
                   key={index}
@@ -137,6 +189,7 @@ const AddProduct = () => {
                 />
               ))}
             </div>
+
             <button
               type="submit"
               className="w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700"
@@ -146,8 +199,8 @@ const AddProduct = () => {
           </form>
         </div>
 
-        {/* Product Preview Sidebar */}
-        <div className=" bg-gray-50 p-6 rounded-lg shadow-md min-w-[400px]">
+
+        <div className="bg-gray-50 p-6 rounded-lg shadow-md min-w-[400px]">
           <h3 className="text-xl font-semibold text-center mb-4">Product Preview</h3>
           <div className="mb-4">
             <h4 className="text-lg font-medium">Product Name: {formData.name || 'Product Name'}</h4>
