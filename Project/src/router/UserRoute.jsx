@@ -5,6 +5,9 @@ import LoadingSpinner from "../components/common/Loading";
 import ByProduct from "../pages/ByProduct";
 import Order from "../pages/Order";
 import UserInfo from "../pages/UserInfo";
+import { ContactUs } from "../pages/extra/Contact";
+import Default from "../pages/extra/Default";
+
 
 // Use lazy loading for pages
 const Home = lazy(() => import("../pages/home"));
@@ -31,7 +34,10 @@ const UserRoute = () => {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/byproduct/:id/:qty/:price" element={<ByProduct />} />
           <Route path="/myOrder" element={<Order />} />
-          <Route path="/profile" element={<UserInfo />} />
+          <Route path="/profile" element={<UserInfo />}/>
+          <Route path="/contact" element={<ContactUs />}/>
+          <Route path='*' element={<Default />} />
+          
         </Routes>
         <Footer />
         

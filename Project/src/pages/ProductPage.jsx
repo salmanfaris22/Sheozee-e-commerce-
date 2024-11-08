@@ -105,21 +105,34 @@ const ProductPage = () => {
               src={data?.images?.filter((e) => e?.is_main === true)[0]?.url || data?.images[0]?.url}
               alt={data?.name}
             />
-            <img
+
+{console.log(data?.images)}
+            {data?.images?.map((e)=>{
+              return (
+                <div key={e?.ID}>
+                <img
               className="w-full h-[100px] col-span-1 bg-gray-200 object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
-              src={data?.images[0]?.url}
+              src={e?.url}
+              alt={e.name}
+            />
+              </div>
+              )
+            })}
+            {/* <img
+              className="w-full h-[100px] col-span-1 bg-gray-200 object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
+              src={data?.images[1]?.url}
               alt={data?.name}
             />
             <img
               className="w-full h-[100px] col-span-1 bg-gray-200 object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
-              src={data?.images[0]?.url}
+              src={data?.images[2]?.url}
               alt={data?.name}
             />
             <img
               className="w-full h-[100px] col-span-1 bg-gray-200 object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
-              src={data?.images[0]?.url}
+              src={data?.images[3]?.url}
               alt={data?.name}
-            />
+            /> */}
           </div>
 
           <div className="flex flex-col gap-2 justify-between p-6">

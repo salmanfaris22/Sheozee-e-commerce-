@@ -52,7 +52,7 @@ export const useDeleteProduct = () => {
   return useMutation({
     mutationFn: async (product_id) => {
       const response = await axios.delete(`http://localhost:8080/v1/auth/product/delete?product_id=${product_id}`,
-      {}, { withCredentials: true });
+       { withCredentials: true });
       return response.data;
     },
     onSuccess: (data) => {

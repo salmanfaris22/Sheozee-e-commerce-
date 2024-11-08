@@ -48,7 +48,7 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.price || formData.images.length === 0) {
+    if (!formData.name || !formData?.price || formData?.images?.length === 0) {
       alert('Please fill in all required fields.');
       return;
     }
@@ -148,7 +148,7 @@ const AddProduct = () => {
                 name="brand"
                 value={formData.brand}
                 onChange={handleChange}
-                options={['Nike', 'Puma', 'Adidas']}
+                options={['Nike', 'Puma', 'Adidas',"New Balance"]}
                 placeholder="Select Brand"
                 required
               />

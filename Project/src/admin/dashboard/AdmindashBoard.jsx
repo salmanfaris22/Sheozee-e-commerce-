@@ -63,16 +63,20 @@ const AdmindashBoard = () => {
         </div>
 
 
-        <div className="col-span-1 p-5 bg-white shadow-lg rounded-lg border border-gray-300">
+        <div className="col-span-1 p-5 flex flex-col justify-between bg-white shadow-lg rounded-lg border border-gray-300">
+          
+          <div>
           <span className="text-lg font-bold text-blue-500">Order Status</span>
           <ProductStatus />
-        </div>
-
-
-        <div className="col-span-1 p-5 bg-red-500 text-white rounded-lg shadow-lg">
+          </div>
+          <div className="col-span-1 p-5 bg-red-500 text-white rounded-lg shadow-lg">
           <div className="text-3xl font-bold">Total Profit</div>
           <div className="text-4xl">{Dtls?.total_profit}</div>
         </div>
+        </div>
+
+
+        
       </div>
     </div>
   );

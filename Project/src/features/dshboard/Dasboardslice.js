@@ -12,7 +12,7 @@ const initialState = {
   order_status:[],
   total_profit:0,
   product_analysis:[],
-  ProductSales:[]
+  ProductSales:[],
 };
 
 export const dashBoardSlice = createSlice({
@@ -30,11 +30,10 @@ export const dashBoardSlice = createSlice({
         state.product_analysis=action.payload?.product_analysis
         state.ProductSales=action.payload?.ProductSales
 
-
-    },
+    }
  
   },
 });
 
-export const {GetDetisls} = dashBoardSlice.actions;
+export const {GetDetisls,Extra} = dashBoardSlice.actions;
 export default dashBoardSlice.reducer;

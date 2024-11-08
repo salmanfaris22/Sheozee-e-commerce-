@@ -53,7 +53,7 @@ const EditProduct = () => {
   const handleAddImage = () => {
     if (newImageUrl) {
       const newImage = {
-        id: product.images.length + 1,
+        id: product?.images?.length + 1,
         product_id: product.id,
         url: newImageUrl,
         is_main: false,
@@ -77,7 +77,7 @@ const EditProduct = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(product);
+    // console.log(product);
     mutate(product);
   };
 
@@ -192,7 +192,7 @@ const EditProduct = () => {
             name="brand"
             value={product?.brand || ""} 
             onChange={handleChange}
-            options={['Nike', 'Puma', 'Adidas']}
+            options={['Nike', 'Puma', 'Adidas',"New Balance"]}
             placeholder="Select Brand"
             required
           />

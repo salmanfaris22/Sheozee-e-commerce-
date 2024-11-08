@@ -36,7 +36,7 @@ const Navbar = () => {
       setIsLoggedIn(true);
     }
     dispatch(TotleCart(length?.items?.length))
-  }, [length,mutate]);
+  }, [length,mutate,isUserMenuOpen,isOpen]);
 
 
 
@@ -102,6 +102,9 @@ const Navbar = () => {
                 <>
                   <Link to="/profile">
                     <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Profile</div>
+                  </Link>
+                  <Link to="/contact">
+                    <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Contact</div>
                   </Link>
                   <Link to="/myOrder">
                     <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">My order</div>

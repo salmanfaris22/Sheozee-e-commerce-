@@ -9,6 +9,7 @@ import EditProduct from "../admin/page/product/EditProduct"
 import AllOrder from "../admin/page/order/AllOrder"
 import EditOrder from "../admin/page/order/EditOrder"
 import AdmindashBoard from "../admin/dashboard/AdmindashBoard"
+import Default from "../pages/extra/Default"
 
 
 
@@ -26,6 +27,7 @@ const AdminRout = () => {
           <Route path="/" element={<AllOrder/>}/>
           <Route path="/:id" element={<EditOrder/>}/>
           <Route path="/DashBoard" element={<AdmindashBoard/>}/>
+          <Route path='*' element={<Default />} />
         </Routes>
     </>
   )

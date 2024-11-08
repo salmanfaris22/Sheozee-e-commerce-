@@ -4,8 +4,10 @@ import JorImg from "../assets/jordan.webp";
 import img from '../assets/mainkeBRand.jpg';
 import MyButton from "../components/common/Botton";
 import Categories from "./Categories";
+import Brand from "./extra/Add-Brand";
+import About from "./extra/About";
+import Garendy from "./extra/Brands-add";
 import ProductList from "../components/layout/SellingList";
-
 
 
 const Home = () => {
@@ -82,11 +84,11 @@ const Home = () => {
         </div>
       </div>
       
-      <ProductList />
+      <ProductList/>
+<Brand/>
 
-
-
-     
+<About/>
+     <Garendy/>
 
     </div>
   );
